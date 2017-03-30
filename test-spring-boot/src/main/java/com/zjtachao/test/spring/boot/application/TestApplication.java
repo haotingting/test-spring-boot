@@ -16,7 +16,7 @@ import com.zjtachao.test.spring.boot.controller.user.UserInfoController;
 
 
  /**
- * TODO 请在此处添加注释
+ * Spring Boot启动类
  * @author <a href="mailto:dh@zjtachao.com">duhao</a>
  * @version $Id$   
  * @since 2.0
@@ -27,6 +27,4 @@ public class TestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UserInfoController.class, args);
 	}
-
-
 }

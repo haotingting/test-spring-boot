@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zjtachao.test.spring.boot.controller.base.BaseController;
 import com.zjtachao.test.spring.boot.pojo.bean.user.UserInfoBean;
 
 
@@ -27,14 +28,15 @@ import com.zjtachao.test.spring.boot.pojo.bean.user.UserInfoBean;
 @EnableAutoConfiguration
 @RestController
 @RequestMapping("/user")
-public class UserInfoController {
+public class UserInfoController extends BaseController{
 
 	@RequestMapping("/{id}")
 	@ResponseBody
     public UserInfoBean view(@PathVariable("id") Long id) {  
 		UserInfoBean user = new UserInfoBean();  
         user.setId(id);  
-        user.setName("zhang");  
+        user.setName("zhang");
+        logger.info("对象："+user);
         return user;  
 	}
 	
