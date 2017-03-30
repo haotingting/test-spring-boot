@@ -9,7 +9,11 @@
  ***************************************************************************/
 package com.zjtachao.test.spring.boot.controller.user;
 
+import javax.annotation.Resource;
+
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.data.redis.core.SetOperations;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,8 +33,22 @@ import com.zjtachao.test.spring.boot.pojo.bean.user.UserInfoBean;
 @RestController
 @RequestMapping("/user")
 public class UserInfoController extends BaseController{
+	
+	/** redis **/
+	@Resource(name="stringRedisTemplate")  
+    private ValueOperations<String,String> valOps; 
+	
+	/** redis **/
+	@Resource(name="stringRedisTemplate")  
+	private SetOperations<String, String> setOps;
 
-	@RequestMapping("/{id}")
+	/**
+	 * 
+	   * 查询
+	   * @param id
+	   * @return
+	 */
+	@RequestMapping("/query/{id}")
 	@ResponseBody
     public UserInfoBean view(@PathVariable("id") Long id) {  
 		UserInfoBean user = new UserInfoBean();  
@@ -39,5 +57,31 @@ public class UserInfoController extends BaseController{
         logger.info("对象："+user);
         return user;  
 	}
+	
+	/**
+	 * 
+	   * 设置数据
+	   * @param key
+	   * @param value
+	   * @return
+	 */
+	@RequestMapping("/set")
+	public String setKeyAndValue(String key , String value){
+		//valOps.set(key, value);
+		setOps.add(key, value);
+		return "SUCCESS";
+	}
+	
+	/**
+	 * 
+	   * 获得数据
+	   * @param key
+	   * @return
+	 */
+	@RequestMapping("/get")
+	public String getKeyAndValue(String key){
+		return valOps.get(key);
+	}
+	
 	
 }
