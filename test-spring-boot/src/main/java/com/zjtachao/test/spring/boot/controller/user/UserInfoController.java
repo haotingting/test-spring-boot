@@ -11,7 +11,6 @@ package com.zjtachao.test.spring.boot.controller.user;
 
 import javax.annotation.Resource;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +28,6 @@ import com.zjtachao.test.spring.boot.pojo.bean.user.UserInfoBean;
  * @version $Id$   
  * @since 2.0
  */
-@EnableAutoConfiguration
 @RestController
 @RequestMapping("/user")
 public class UserInfoController extends BaseController{

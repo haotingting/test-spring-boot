@@ -10,9 +10,13 @@
 package com.zjtachao.test.spring.boot.application;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.zjtachao.test.spring.boot.controller.user.UserInfoController;
+import com.zjtachao.test.spring.boot.Interceptor.UserAuthInterceptor;
 
 
  /**
@@ -21,10 +25,28 @@ import com.zjtachao.test.spring.boot.controller.user.UserInfoController;
  * @version $Id$   
  * @since 2.0
  */
+@EnableAutoConfiguration
 @SpringBootApplication
-public class TestApplication {
+@ComponentScan("com.zjtachao")
+public class TestApplication extends WebMvcConfigurerAdapter {
 	
+	/**
+	 * 
+	   * 主启动方法
+	   * @param args
+	 */
 	public static void main(String[] args) {
-		SpringApplication.run(UserInfoController.class, args);
+		SpringApplication.run(TestApplication.class, args);
 	}
+	
+	/**
+	 * 增加拦截器
+	 * @param registry
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
+	 */
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new UserAuthInterceptor());
+    }
+	
+	
 }
