@@ -54,7 +54,7 @@ public class UserAuthInterceptor extends HandlerInterceptorAdapter {
 			flag = false;
 		}
 		
-		logger.info("preHandle:"+path);
+		logger.info("preHandle:{}",path);
 		return flag;
 	}
 	

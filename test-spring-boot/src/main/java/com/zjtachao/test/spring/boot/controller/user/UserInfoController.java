@@ -52,7 +52,7 @@ public class UserInfoController extends BaseController{
 		UserInfoBean user = new UserInfoBean();  
         user.setId(id);  
         user.setName("zhang");
-        logger.info("对象："+user);
+        logger.info("对象:{}",user);
         return user;  
 	}
 	
@@ -80,6 +80,5 @@ public class UserInfoController extends BaseController{
 	public String getKeyAndValue(String key){
 		return valOps.get(key);
 	}
-	
 	
 }
