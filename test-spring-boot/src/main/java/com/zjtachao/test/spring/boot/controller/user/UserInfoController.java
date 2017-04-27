@@ -14,7 +14,9 @@ import javax.annotation.Resource;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,11 +44,11 @@ public class UserInfoController extends BaseController{
 
 	/**
 	 * 
-	   * 查询
+	   * 查询 GET方式 （链接参数传递）
 	   * @param id
 	   * @return
 	 */
-	@RequestMapping("/query/{id}")
+	@RequestMapping(value = "/query/{id}" , method = RequestMethod.GET)
 	@ResponseBody
     public UserInfoBean view(@PathVariable("id") Long id) {  
 		UserInfoBean user = new UserInfoBean();  
@@ -58,16 +60,17 @@ public class UserInfoController extends BaseController{
 	
 	/**
 	 * 
-	   * 设置数据
+	   * 设置数据 （请求json 返回json）
 	   * @param key
 	   * @param value
 	   * @return
 	 */
-	@RequestMapping("/set")
-	public String setKeyAndValue(String key , String value){
+	@RequestMapping(value = "/set" , method = { RequestMethod.POST})
+	@ResponseBody
+	public UserInfoBean setKeyAndValue(@RequestBody UserInfoBean loginBean){
 		//valOps.set(key, value);
-		setOps.add(key, value);
-		return "SUCCESS";
+		setOps.add(loginBean.getCode(), loginBean.getName());
+		return loginBean;
 	}
 	
 	/**

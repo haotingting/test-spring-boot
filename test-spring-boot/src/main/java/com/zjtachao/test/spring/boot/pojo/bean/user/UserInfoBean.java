@@ -28,9 +28,12 @@ public class UserInfoBean implements Serializable {
 	/** 用户基本信息 **/
 	private Long id;
 	
+	/** 用户编码 **/
+	private String code;
+	
 	/** 用户名称 **/
 	private String name;
-
+	
 	/**  
 	 *@return  the id
 	 */
@@ -59,6 +62,21 @@ public class UserInfoBean implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**  
+	 *@return  the code
+	 */
+	
+	public String getCode() {
+		return code;
+	}
+
+	/** 
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }
